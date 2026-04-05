@@ -153,4 +153,4 @@ A closer inspection of the blog page reveals text that is not visible under norm
 
 **PRISM** is an open-source intelligence platform developed by the author of this writeup. It consolidates multiple reconnaissance modules — including WHOIS, DNS enumeration, Shodan, VirusTotal, social account lookups, Google Dorks, and file metadata analysis — into a single unified interface. In this exercise, PRISM's File Metadata module was used to extract and parse all EXIF data from the target image.
 
-> PRISM v2.0 — 12+ modules · 8+ sources · 4 scan types · Coming soon
+> PRISM v2.0 — 12+ modules · 20+ sources · 4 scan types · Coming soon
