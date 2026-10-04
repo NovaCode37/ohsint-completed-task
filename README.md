@@ -1,10 +1,10 @@
-# TryHackMe — OhSINT Writeup
+# TryHackMe OhSINT writeup
 
 **Platform:** TryHackMe  
 **Room:** [OhSINT](https://tryhackme.com/room/ohsint)  
 **Category:** OSINT  
 **Difficulty:** Easy  
-**Tool developed by author:** PRISM — Open Source Intelligence Platform *(coming soon)*
+**Tool developed by author:** PRISM, an open-source intelligence platform *(coming soon)*
 
 ---
 
@@ -31,9 +31,9 @@ A single image file is provided as the only input: a Windows XP desktop wallpape
 
 ## Walkthrough
 
-### Step 1 — EXIF Metadata Extraction via PRISM
+### Step 1. EXIF metadata extraction via PRISM
 
-The investigation begins with static analysis of the provided image file. Using the **File Metadata** module in **PRISM** — an OSINT platform developed by the author — all embedded EXIF and XMP tags were automatically extracted and parsed.
+The investigation begins with static analysis of the provided image file. Using the **File Metadata** module in **PRISM**, an OSINT platform developed by the author, all embedded EXIF and XMP tags were automatically extracted and parsed.
 
 ![PRISM Main Interface](1.jpg)
 
@@ -44,7 +44,7 @@ The investigation begins with static analysis of the provided image file. Using 
 | Field | Value |
 |-------|-------|
 | Filename | `WindowsXP_1551719814755.jpg` |
-| Dimensions | 1920 × 1080 px |
+| Dimensions | 1920 x 1080 px |
 | GPS Latitude | 54.294796 |
 | GPS Longitude | -2.258368 |
 | TIFF:Copyright | `OWoodflint` |
@@ -53,7 +53,7 @@ The `Copyright` field exposes a username: **OWoodflint**. This becomes the prima
 
 ---
 
-### Step 2 — Social Media Profile Discovery
+### Step 2. Social media profile discovery
 
 Searching for the username `OWoodflint` on Twitter (X) returns an active account with 500+ followers.
 
@@ -64,15 +64,15 @@ A review of the account's posts reveals the following disclosure:
 ![Tweet Containing BSSID](5.jpg)
 
 > "From my house I can get free wifi ;D  
-> Bssid: B4:5D:50:AA:86:41 — Go nuts!"
+> Bssid: B4:5D:50:AA:86:41. Go nuts!"
 
 The tweet publicly exposes the BSSID of the target's home wireless access point.
 
-**Finding — Avatar:** cat
+**Avatar:** cat
 
 ---
 
-### Step 3 — WiFi Network Geolocation via WiGLE
+### Step 3. WiFi network geolocation via WiGLE
 
 The BSSID `B4:5D:50:AA:86:41` was submitted to [WiGLE.net](https://wigle.net), a global wireless network database, to identify the physical location and network name of the access point.
 
@@ -80,12 +80,12 @@ The BSSID `B4:5D:50:AA:86:41` was submitted to [WiGLE.net](https://wigle.net), a
 
 The lookup confirms the network's location in London and returns the associated SSID.
 
-**Finding — City:** London  
-**Finding — SSID:** UnileverWiFi
+**City:** London  
+**SSID:** UnileverWiFi
 
 ---
 
-### Step 4 — GitHub Profile and Email Address
+### Step 4. GitHub profile and email address
 
 A search for the username `OWoodflint` via Google surfaces a public GitHub repository.
 
@@ -97,12 +97,12 @@ The repository `OWoodfl1nt/people_finder` contains a README file with the target
 
 > "Email me if you want to help out: OWoodflint@gmail.com"
 
-**Finding — Email:** OWoodflint@gmail.com  
-**Finding — Source:** GitHub
+**Email:** OWoodflint@gmail.com  
+**Source:** GitHub
 
 ---
 
-### Step 5 — Blog Post: Current Location
+### Step 5. Blog post with current location
 
 The GitHub README references a personal WordPress blog at `https://oliverwoodflint.wordpress.com/`. The most recent post contains a location disclosure.
 
@@ -110,17 +110,17 @@ The GitHub README references a personal WordPress blog at `https://oliverwoodfli
 
 > "Im in New York right now, so I will update this site right away with new photos!"
 
-**Finding — Current Location:** New York
+**Current location:** New York
 
 ---
 
-### Step 6 — Hidden Password Recovery
+### Step 6. Hidden password recovery
 
 A closer inspection of the blog page reveals text that is not visible under normal viewing conditions due to white-on-white formatting. Selecting all page content makes the hidden text visible.
 
 ![Hidden Text Revealed](10.jpg)
 
-**Finding — Password:** pennYDropper.!
+**Password:** pennYDropper.!
 
 ---
 
@@ -151,6 +151,6 @@ A closer inspection of the blog page reveals text that is not visible under norm
 
 ## About PRISM
 
-**PRISM** is an open-source intelligence platform developed by the author of this writeup. It consolidates multiple reconnaissance modules — including WHOIS, DNS enumeration, Shodan, VirusTotal, social account lookups, Google Dorks, and file metadata analysis — into a single unified interface. In this exercise, PRISM's File Metadata module was used to extract and parse all EXIF data from the target image.
+**PRISM** is an open-source intelligence platform developed by the author of this writeup. It brings together multiple reconnaissance modules (WHOIS, DNS enumeration, Shodan, VirusTotal, social account lookups, Google Dorks, and file metadata analysis) in one interface. In this exercise, PRISM's File Metadata module was used to extract and parse all EXIF data from the target image.
 
-> PRISM v2.0 — 15+ modules · 10+ sources · 5 scan types · Coming soon
+> PRISM v2.0: 15+ modules, 10+ sources, 5 scan types. Coming soon.
